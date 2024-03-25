@@ -96,6 +96,16 @@ const styles = StyleSheet.create({
     textButton: {
         color: '#fff',
         fontWeight: 'bold',
+    },
+
+    textName: {
+        fontSize: 15,
+        fontWeight: 'bold',
+    },
+
+    textPrice: {
+        fontSize: 20,
+        fontWeight: 'bold',
     }
 
 })

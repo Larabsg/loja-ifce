@@ -1,5 +1,5 @@
-import React from "react";
-import { FlatList, SafeAreaView, StatusBar, TouchableHighlight, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { FlatList, SafeAreaView, StatusBar, TouchableHighlight, View, VirtualizedList } from "react-native";
 import Text from "../../../shared/components/text/Text";
 import styles from "../styles/homeList.styles";
 import axios from "axios";
@@ -64,51 +64,49 @@ const HomeList = () => {
         },          
     ]
 
-    const products = [
-        {
-            id: 1
-        },
+    // axios({
+    //     method: 'get',
+    //     url: 'https://localhost:8080/user/all',
+    // }).then((response) => {
+    //     console.log(response.data)
+    // })
 
-        {
-            id: 2
-        },
+    // useEffect(() => {
+    //     handleGetProducts()
+    // }, [])
 
-        {
-            id: 3
-        },
+    const [products, setProducts] = useState([])
 
-        {
-            id: 4
-        },
+    useEffect(() => {
+        handleGetProducts()
+    }, [])
 
-        {
-            id: 5
-        },
-
-        {
-            id: 6
-        },
-
-        {
-            id: 7
-        },
-
-        {
-            id: 8
-        }
-    ]
 
     const handleGetProducts = async () => {
-        await axios
-            .get("https://localhost:8080/product")
-            .then((response) => {
-                console.log(response.data)
-            })
+        try {
+            const response = await axios.get("http://192.168.18.109:8080/product/page")
+            // setProducts(response.data)
+            setProducts(response.data.data)
+            console.log(response.data)
+        } catch (error) {
+            console.log(error)
+        }
+        // await axios
+        //     .get("https://localhost:8080/user/all")
+        //     .then((response) => {
+        //         console.log(response.data)
+        //     })
     }
+
+
 
     const onPress = () => {
         return
     }
+
+    
+
+    const getItemCount = (_data: unknown) => 8;
 
     return (
         <SafeAreaView style={styles.container}>
@@ -146,7 +144,7 @@ const HomeList = () => {
                         <View style={styles.viewCategories}>
                             <TouchableHighlight
                                 underlayColor={'#E8E5FE'} 
-                                onPress={onPress}>
+                                onPress={handleGetProducts}>
                                 <View style={styles.button}>
                                     <Text style={styles.textButton}>{item.name}</Text>
                                 </View>
@@ -164,6 +162,33 @@ const HomeList = () => {
             <View style={styles.viewFlatListProducts}>
                 <FlatList
                     data={products}
+                    keyExtractor={(item) => item.id.toString()}
+                    renderItem={({ item }) => (
+                        <View style={styles.viewProducts}>
+                            <Text style={styles.textName}>{item.name}</Text>
+                            <Text style={styles.textPrice}>R$ {item.price},00</Text>
+                        </View>
+                    )}
+                    numColumns={2}
+                />
+            </View>
+
+            {/* <View>
+                <FlatList
+                    data={products}
+                    keyExtractor={(item) => item.id.toString()}
+                    renderItem={({item}) => (
+                        <View style={styles.viewProducts}>
+                            <Text>{item.name}</Text>
+                        </View>
+                    
+                    )}
+                />
+            </View> */}
+
+            {/* <View style={styles.viewFlatListProducts}>
+                <FlatList
+                    data={products}
                     renderItem={({ item }) => (
                         <View style={styles.viewProducts}>
                             <Text>{item.id}</Text>
@@ -172,7 +197,7 @@ const HomeList = () => {
 
                     numColumns={2}
                 />
-            </View>
+            </View> */}
 
             </ScrollView>
 
