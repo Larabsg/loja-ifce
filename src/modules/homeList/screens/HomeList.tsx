@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, SafeAreaView, StatusBar, TouchableHighlight, View, VirtualizedList } from "react-native";
+import { FlatList, Image, SafeAreaView, StatusBar, TouchableHighlight, View, VirtualizedList } from "react-native";
 import Text from "../../../shared/components/text/Text";
 import styles from "../styles/homeList.styles";
 import axios from "axios";
 import Input from "../../../shared/components/input/Input";
 import { theme } from "../../../themes/theme";
 import { ScrollView } from "react-native-gesture-handler";
+import { Icon } from "@rneui/themed";
 
 const HomeList = () => {
 
@@ -13,21 +14,25 @@ const HomeList = () => {
         {
             id: 1,
             name: "Promoção",
+            image: "../../../../assets/promocao-1.png"
         },
 
         {
             id: 2,
             name: "Lançamento",
+            image: ""
         },
 
         {
             id: 3,
             name: "Mais vendidos",
+            image: ""
         },
 
         {
             id: 4,
             name: "Ofertas do dia",
+            image: ""
         },
 
     ]
@@ -109,7 +114,7 @@ const HomeList = () => {
     const getItemCount = (_data: unknown) => 8;
 
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView>
             <StatusBar
             backgroundColor={theme.colors.neutralTheme.primary}
             />
@@ -117,54 +122,68 @@ const HomeList = () => {
 
             <View style={styles.navInput}>
                 <View style={styles.viewInput}>
+                    {/* <Icon name="search" /> */}
                     <Input 
-                    // style={styles.input}
                     placeholder="Buscar produtos"
                     />
                 </View>
             </View>
 
-            <View>
+            <View style={styles.promotions}>
                 <FlatList
                 horizontal
                     data={data}
                     // keyExtractor={(item) => item.id}
                     renderItem={({ item }) => (
                         <View style={styles.viewItemFlatList}>
+                            <Image
+                                style={styles.imagePromotion}
+                                source={require("../../../../assets/promocao-1.png")}/>
                             <Text>{item.name}</Text>
                         </View>
                     )}
                 />
             </View>
 
-            <View style={styles.viewFlatListCategory}>
-                <FlatList
-                    data={categories}
-                    renderItem={({ item }) => (
-                        <View style={styles.viewCategories}>
-                            <TouchableHighlight
-                                underlayColor={'#E8E5FE'} 
-                                onPress={handleGetProducts}>
-                                <View style={styles.button}>
-                                    <Text style={styles.textButton}>{item.name}</Text>
-                                </View>
-                            </TouchableHighlight>
-                        </View>
-                    )}
-                    numColumns={3}
-                />
+            <View style={styles.viewText}>
+                <Text style={styles.text}>Categorias</Text>
             </View>
 
-            <View style={styles.viewTextProduct}>
-                <Text style={styles.textProduct}>Produtos</Text>
+            <View style={styles.containerCategories}>
+                {/* <View style={styles.viewFlatListCategory}> */}
+                    <FlatList
+                        // style={styles.flatListCategories}
+                        data={categories}
+                        renderItem={({ item }) => (
+                            <View style={styles.viewCategories}>
+                                <TouchableHighlight
+                                    style={styles.button}
+                                    underlayColor={'#E8E5FE'} 
+                                    onPress={handleGetProducts}>
+                                        <Text style={styles.textButton}>{item.name}</Text>
+                                </TouchableHighlight>
+                            </View>
+                        )}
+                        numColumns={3}
+                    />
+                {/* </View> */}
+            </View>
+
+            <View style={styles.viewText}>
+                <Text style={styles.text}>Produtos</Text>
             </View>
 
             <View style={styles.viewFlatListProducts}>
                 <FlatList
+                    style={styles.flatListProducts}
                     data={products}
                     keyExtractor={(item) => item.id.toString()}
                     renderItem={({ item }) => (
                         <View style={styles.viewProducts}>
+                            <Image
+                                style={styles.imageProduct}
+                                source={{uri: item.image}}
+                            />
                             <Text style={styles.textName}>{item.name}</Text>
                             <Text style={styles.textPrice}>R$ {item.price},00</Text>
                         </View>

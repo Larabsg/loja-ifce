@@ -2,11 +2,10 @@ import { StyleSheet } from "react-native";
 import { theme } from "../../../themes/theme";
 
 const styles = StyleSheet.create({
-    container: {
-        // flex: 1,
-        // alignItems: 'center',
-        // justifyContent: 'center',
-        // marginTop: 100,
+
+    imagePromotion: {
+        resizeMode: 'cover',
+        borderRadius: 15,
     },
 
     navInput: {
@@ -18,15 +17,30 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
 
+    tinyLogo: {
+        width: 50,
+        height: 50,
+      },
+
+      imageProduct: {
+        resizeMode: 'center',
+        // width: 150,
+        height: 150,
+        // borderRadius: 15,
+      },
+
     viewInput: {
         width: '95%',
         padding: 10,
-        // height: 10,
+    },
+
+    promotions: {
+        marginLeft: 10,
+        marginTop: 10,
     },
 
     viewItemFlatList: {
         padding: 10,
-        backgroundColor: '#E8E5FE',
         width: 200,
         height: 150,
         margin: 10,
@@ -36,61 +50,32 @@ const styles = StyleSheet.create({
         position: 'relative',
     },
 
+    containerCategories: {
+        marginHorizontal: 20,
+        marginVertical: 5,
+        flex: 1,
+    },
+
     viewFlatListCategory: {
-        // flex: 4,
-        // backgroundColor: 'red',
-        alignItems: 'center',
-        
-        // margin: 10
+        backgroundColor: 'red',
+        width: '100%',
     },
-
+    
     viewCategories: {
-        // backgroundColor: 'red',
-        // padding: 10,
-        margin: 10,
-        borderRadius: 15,
-        // border: '1px solid #000',
-        // borderWidth: 1,
-        // width: 100,
-        alignItems: 'center',
-        justifyContent: 'center',
+        flex: 1,
+        padding: 5,
     },
 
-    viewFlatListProducts: {
-        // flex: 1,
-        // backgroundColor: 'blue',
-        alignItems: 'center',
-        // margin: 10
+    flatListCategories: {
+        backgroundColor: 'blue',
     },
-
-    viewProducts: {
-        backgroundColor: '#E8E5FE',
-        padding: 10,
-        margin: 10,
-        borderRadius: 15,
-        // borderWidth: 1,
-        width: 150,
-        height: 150,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-
-    viewTextProduct: {
-        marginLeft: 20,
-        marginVertical: 10
-    },
-
-    textProduct: {
-        fontSize: 20,
-        fontWeight: 'bold',
-    },
-
+    
     button: {
         alignItems: 'center',
         backgroundColor: theme.colors.neutralTheme.primary,
         padding: 10,
-        width: 100,
-        borderRadius: 15,
+        width: '100%',
+        borderRadius: 10,
     },
 
     textButton: {
@@ -98,9 +83,37 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
 
+    viewFlatListProducts: {
+        flex: 1,
+        marginHorizontal: 20,
+        justifyContent: 'space-around',
+    },
+
+    viewProducts: {
+        flex: 1,
+        padding: 10,
+        backgroundColor: 'white',
+        borderRadius: 15,
+        gap: 10,
+        margin: 5
+    },
+
+    viewText: {
+        marginLeft: 20,
+        marginVertical: 10
+    },
+
+    text: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: theme.colors.neutralTheme.text
+    },
+
+
     textName: {
         fontSize: 15,
-        fontWeight: 'bold',
+        // fontWeight: 'bold',
+        marginVertical: 5,
     },
 
     textPrice: {
