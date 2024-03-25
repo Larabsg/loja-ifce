@@ -7,6 +7,10 @@ import styles from "../styles/profile.styles";
 import { theme } from "../../../themes/theme";
 
 const Profile = ({navigation}) => {
+    const onPress = () => {
+        navigation.navigate('Login')
+    }
+    
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.body}>
@@ -23,7 +27,7 @@ const Profile = ({navigation}) => {
             </View>
 
             <View style={styles.footer}>
-                <Button style={styles.button} title="Sair" backColor={theme.colors.neutralTheme.accent}/>
+                <Button style={styles.button} title="Sair" backColor={theme.colors.neutralTheme.accent} onPress={onPress}/>
             </View>
 
         </SafeAreaView>

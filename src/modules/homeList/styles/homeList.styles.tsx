@@ -17,16 +17,9 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
 
-    tinyLogo: {
-        width: 50,
-        height: 50,
-      },
-
       imageProduct: {
         resizeMode: 'center',
-        // width: 150,
         height: 150,
-        // borderRadius: 15,
       },
 
     viewInput: {
@@ -40,14 +33,10 @@ const styles = StyleSheet.create({
     },
 
     viewItemFlatList: {
-        padding: 10,
-        width: 200,
-        height: 150,
+        width: 300,
+        height: 168,
         margin: 10,
         alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 15,
-        position: 'relative',
     },
 
     containerCategories: {
@@ -112,7 +101,6 @@ const styles = StyleSheet.create({
 
     textName: {
         fontSize: 15,
-        // fontWeight: 'bold',
         marginVertical: 5,
     },
 

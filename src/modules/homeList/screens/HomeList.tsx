@@ -14,26 +14,20 @@ const HomeList = () => {
         {
             id: 1,
             name: "Promoção",
-            image: "../../../../assets/promocao-1.png"
+            image: require("../../../../assets/promocao-1.png")
         },
 
         {
             id: 2,
             name: "Lançamento",
-            image: ""
+            image: require("../../../../assets/promocao-2.png")
         },
 
         {
             id: 3,
             name: "Mais vendidos",
-            image: ""
-        },
-
-        {
-            id: 4,
-            name: "Ofertas do dia",
-            image: ""
-        },
+            image: require("../../../../assets/promocao-3.png")
+        }
 
     ]
 
@@ -69,17 +63,6 @@ const HomeList = () => {
         },          
     ]
 
-    // axios({
-    //     method: 'get',
-    //     url: 'https://localhost:8080/user/all',
-    // }).then((response) => {
-    //     console.log(response.data)
-    // })
-
-    // useEffect(() => {
-    //     handleGetProducts()
-    // }, [])
-
     const [products, setProducts] = useState([])
 
     useEffect(() => {
@@ -90,28 +73,15 @@ const HomeList = () => {
     const handleGetProducts = async () => {
         try {
             const response = await axios.get("http://192.168.18.109:8080/product/page")
-            // setProducts(response.data)
             setProducts(response.data.data)
-            console.log(response.data)
         } catch (error) {
             console.log(error)
         }
-        // await axios
-        //     .get("https://localhost:8080/user/all")
-        //     .then((response) => {
-        //         console.log(response.data)
-        //     })
     }
 
-
-
-    const onPress = () => {
-        return
+    const handleGetProductsByCategory = (category: string) => {
+        console.log(category)
     }
-
-    
-
-    const getItemCount = (_data: unknown) => 8;
 
     return (
         <SafeAreaView>
@@ -138,8 +108,8 @@ const HomeList = () => {
                         <View style={styles.viewItemFlatList}>
                             <Image
                                 style={styles.imagePromotion}
-                                source={require("../../../../assets/promocao-1.png")}/>
-                            <Text>{item.name}</Text>
+                                source={item.image}/>
+                            {/* <Text>{item.name}</Text> */}
                         </View>
                     )}
                 />
@@ -158,8 +128,8 @@ const HomeList = () => {
                             <View style={styles.viewCategories}>
                                 <TouchableHighlight
                                     style={styles.button}
-                                    underlayColor={'#E8E5FE'} 
-                                    onPress={handleGetProducts}>
+                                    underlayColor={'#E8E5FE'}
+                                    onPress={() => {}}>
                                         <Text style={styles.textButton}>{item.name}</Text>
                                 </TouchableHighlight>
                             </View>
@@ -175,7 +145,6 @@ const HomeList = () => {
 
             <View style={styles.viewFlatListProducts}>
                 <FlatList
-                    style={styles.flatListProducts}
                     data={products}
                     keyExtractor={(item) => item.id.toString()}
                     renderItem={({ item }) => (

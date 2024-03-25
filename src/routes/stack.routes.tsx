@@ -22,11 +22,8 @@ const StackRoutes = () => {
                     options={{title: "Home"}} 
                     name="HomeStack" 
                     component={TabRoutes}/>
-                <Stack.Screen 
-                    options={{title: "Profile"}} 
-                    name="ProfileStack" 
-                    component={Profile}/>
             </Stack.Navigator>
+            
     )
 }
 
