@@ -1,0 +1,1 @@
+export const LOCAL_HOST = '192.168.18.109'

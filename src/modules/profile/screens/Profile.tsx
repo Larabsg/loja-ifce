@@ -5,11 +5,30 @@ import Text from "../../../shared/components/text/Text";
 import Button from "../../../shared/components/button/Button";
 import styles from "../styles/profile.styles";
 import { theme } from "../../../themes/theme";
+import { getItemStorage } from "../../../shared/function/storageProxy";
+import { LOCAL_HOST } from "../../../shared/constants/localhost";
+import axios from "axios";
+import { AUTHORIZATION_KEY } from "../../../shared/constants/authorization";
 
 const Profile = ({navigation}) => {
     const onPress = () => {
         navigation.navigate('Login')
     }
+
+    // const handleGetUser = async () => {
+    //     const token = await getItemStorage(AUTHORIZATION_KEY)
+    //     const localhost = LOCAL_HOST
+    //     try {
+    //         const response = await axios.get(`http://${localhost}:8080/product/page`,
+    //                                             {
+    //                                                 headers: {
+    //                                                     'Authorization': `${token}`
+    //                                                 }
+    //                                             })
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
     
     return (
         <SafeAreaView style={styles.container}>

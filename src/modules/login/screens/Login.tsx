@@ -9,6 +9,7 @@ import axios from 'axios';
 import { AUTHORIZATION_KEY } from '../../../shared/constants/authorization';
 import { getItemStorage, setItemStorage } from '../../../shared/function/storageProxy';
 import { useNavigation } from '@react-navigation/native';
+import { LOCAL_HOST } from '../../../shared/constants/localhost';
 
 const Login = () => {
 
@@ -18,27 +19,16 @@ const Login = () => {
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
 
-    const onPress = () => {
-        navigation.navigate('HomeStack')
-        console.log('Email: ' + email)
-        console.log('Senha: ' + senha)
-    }
-
-    // const handleOnPress = async () => {
-    //     const result = await axios.get("http://localhost")
-    // }
-
     const handleOnPress = async () => {
-        const token = AUTHORIZATION_KEY
-        console.log(typeof(senha))
-        
-        await axios.post("http://192.168.18.109:8080/auth", {
+
+        const localhost = LOCAL_HOST
+        await axios.post(`http://${localhost}:8080/auth`, {
             email: email,
             password: senha
     })
-    .then(async (res) =>{
-        setItemStorage(AUTHORIZATION_KEY, res.data.acessToken);
-        console.log("teste", res.data)
+    .then((res) =>{
+        setItemStorage(AUTHORIZATION_KEY, res.data.accessToken);
+        // console.log("teste", res.data)
         // dispatch(setUserAction(res.data))
         // navigation.reset(
         //     {
@@ -47,9 +37,9 @@ const Login = () => {
         //     }
         // )
 
-        const teste = await getItemStorage(AUTHORIZATION_KEY)
+        // const teste = await getItemStorage(AUTHORIZATION_KEY)
 
-        console.log("TESTE TOKEN", teste)
+        // console.log("TESTE TOKEN", teste)
 
         navigation.navigate('HomeStack')
 
@@ -70,8 +60,6 @@ const Login = () => {
                     source={require('../../../../assets/apps.png')}
                 />
             </View>
-
-            {/* <Text style={styles.title} type='TITLE'>Bem vindo</Text> */}
 
             <Input style={styles.input} placeholder="Email" onChangeText={setEmail} />
             <Input style={styles.input} secureTextEntry={true} placeholder="Senha" onChangeText={setSenha}/>

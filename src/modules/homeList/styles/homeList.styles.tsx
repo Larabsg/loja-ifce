@@ -8,24 +8,10 @@ const styles = StyleSheet.create({
         borderRadius: 15,
     },
 
-    navInput: {
-        backgroundColor: theme.colors.neutralTheme.primary,
-        width: '100%',
-        alignItems: 'center',
-        position: 'relative',
-        top: 0,
-        marginBottom: 10,
-    },
-
       imageProduct: {
         resizeMode: 'center',
         height: 150,
       },
-
-    viewInput: {
-        width: '95%',
-        padding: 10,
-    },
 
     promotions: {
         marginLeft: 10,

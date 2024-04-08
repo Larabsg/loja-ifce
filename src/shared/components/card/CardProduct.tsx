@@ -1,14 +1,9 @@
 import { Image, View } from "react-native"
 import Text from "../text/Text"
 import { styles } from "./card.style";
+import { ProductType } from "../../../types/ProductType/productType";
 
-type CardProps = {
-    name: string;
-    image: string;
-    price: string;
-}
-
-const Card = (props: CardProps) => {
+const Card = (props: ProductType) => {
     return (
         <View style={styles.viewProducts}>
             <Image
