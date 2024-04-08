@@ -7,8 +7,12 @@ import Input from "../../../shared/components/input/Input";
 import { theme } from "../../../themes/theme";
 import { ScrollView } from "react-native-gesture-handler";
 import { Icon } from "@rneui/themed";
+import { ProductType } from "../../../types/ProductType/productType";
+import { getItemStorage } from "../../../shared/function/storageProxy";
+import { AUTHORIZATION_KEY } from "../../../shared/constants/authorization";
+import Card from "../../../shared/components/card/CardProduct";
 
-const HomeList = () => {
+const HomeList = ({navigation} : {navigation: any}) => {
 
     const data = [
         {
@@ -71,12 +75,23 @@ const HomeList = () => {
 
 
     const handleGetProducts = async () => {
+        const token = await getItemStorage(AUTHORIZATION_KEY)
+        console.log(token)
         try {
-            const response = await axios.get("http://192.168.18.109:8080/product/page")
+            const response = await axios.get("http://192.168.18.109:8080/product/page",
+                                                {
+                                                    headers: {
+                                                        'Authorization': `${token}`
+                                                    }
+                                                })
             setProducts(response.data.data)
         } catch (error) {
             console.log(error)
         }
+    }
+
+    const handleGoToProductDetail = (product: ProductType) => {
+        navigation.navigate("ProductDetail", { product })
     }
 
     const handleGetProductsByCategory = (category: string) => {
@@ -148,14 +163,20 @@ const HomeList = () => {
                     data={products}
                     keyExtractor={(item) => item.id.toString()}
                     renderItem={({ item }) => (
-                        <View style={styles.viewProducts}>
-                            <Image
-                                style={styles.imageProduct}
-                                source={{uri: item.image}}
-                            />
-                            <Text style={styles.textName}>{item.name}</Text>
-                            <Text style={styles.textPrice}>R$ {item.price},00</Text>
-                        </View>
+                        // <View style={styles.viewProducts}>
+                        //     <Image
+                        //         style={styles.imageProduct}
+                        //         source={{uri: item.image}}
+                        //     />
+                        //     <Text style={styles.textName}>{item.name}</Text>
+                        //     <Text style={styles.textPrice}>R$ {item.price},00</Text>
+                        // </View>
+                        <Card
+                            name={item.name}
+                            image={item.image}
+                            price={item.price}
+                            // onPress={() => handleGoToProductDetail(item)}
+                        />
                     )}
                     numColumns={2}
                 />
